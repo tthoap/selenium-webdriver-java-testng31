@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.sleep;
+
 public class Topic_00_Template {
     WebDriver driver;
 
@@ -28,10 +30,18 @@ public class Topic_00_Template {
         //
     }
 
+
     @AfterClass
     public void afterClass() {
         driver.quit();
     }
 
+    public void SleepInSeconds(long timeInSecond) {
+        try {
+            Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
 }
