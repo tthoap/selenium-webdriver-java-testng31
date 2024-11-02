@@ -82,7 +82,6 @@ public class Topic_09_Default_DropDown {
 
         Assert.assertEquals(driver.findElement(By.cssSelector("input#Email")).getAttribute("value"),emailAddress);
 
-
     }
 
 
