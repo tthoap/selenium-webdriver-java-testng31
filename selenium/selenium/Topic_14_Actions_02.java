@@ -103,9 +103,12 @@ public class Topic_14_Actions_02 {
         SleepInSeconds(2);
         Assert.assertFalse(driver.findElement(quitContextBy).isDisplayed());
 
-
-
     }
+    @Test
+    public void TC_04_Drag_And_Drop() {
+        driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
+    }
+
         @AfterClass
         public void afterClass () {
             driver.quit();
