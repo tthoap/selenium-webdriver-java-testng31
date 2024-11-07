@@ -54,7 +54,10 @@ public class Topic_14_Actions_01 {
         actions.moveToElement(driver.findElement(By.cssSelector("span.icon_menu"))).perform();
 
         actions.moveToElement(driver.findElement(By.cssSelector("ul.nav a[title='Sách Trong Nước']"))).perform();
-        driver.findElement(By.xpath("//div[@class='fhs_menu_content fhs_column_left']//a[text()='Kỹ Năng Sống']")).click();
+        driver.findElement(By.xpath("//div[@class='fhs_column_stretch']//a[text()='Kỹ Năng Sống']")).click();
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.mb-breadcrumbs strong")).getText(), "KỸ NĂNG SỐNG");
+        Assert.assertTrue(driver.findElement(By.cssSelector("div.mb-breadcrumbs strong")).isDisplayed());
+
 
     }
 
