@@ -1,9 +1,7 @@
 package selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import org.openqa.selenium.interactions.Actions;
@@ -21,13 +19,15 @@ public class Topic_14_Actions_02 {
     Actions action;
     String osName = System.getProperty("os.name");
     Keys keys;
+    JavascriptExecutor jsExecutor;
 
     @BeforeClass
     public void beforeClass() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         action = new Actions(driver);
+        jsExecutor = (JavascriptExecutor) driver;
 
         keys = osName.startsWith("Window") ? Keys.CONTROL : Keys.COMMAND;
 
@@ -67,12 +67,11 @@ public class Topic_14_Actions_02 {
     @Test
     public void TC_03_Double_Click() {
         driver.get("https://automationfc.github.io/basic-form/index.html");
-        driver.manage().window().maximize();
+       // driver.manage().window().maximize();
         SleepInSeconds(3);
-        //action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
-
-        action.scrollToElement(driver.findElement(By.xpath("//button[text()='Double click me']"))).doubleClick().perform();
-
+        action.scrollToElement(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
+       // jsExecutor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()='Double click me']")));
+        action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
         Assert.assertTrue(driver.findElement(By.xpath("//p[text()='Hello Automation Guys!']")).isDisplayed());
 
     }
