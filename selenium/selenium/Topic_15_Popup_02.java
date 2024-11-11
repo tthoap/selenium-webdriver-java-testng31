@@ -1,6 +1,7 @@
 package selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -76,7 +77,12 @@ public class Topic_15_Popup_02 {
         //if display => Close then go to next step(search)
         if (driver.findElements(newsletterPopup).size() > 0 && driver.findElements(newsletterPopup).get(0).isDisplayed()) {
             System.out.println("Popup is displayed");
-            driver.findElement(By.cssSelector("button.close")).click();
+            int heighBrowser = driver.manage().window().getSize().getHeight();
+            if(heighBrowser < 1920){
+                ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.cssSelector("button.close")));
+            } else {
+                driver.findElement(By.cssSelector("button.close")).click();
+            }
 
         }
     }
