@@ -24,7 +24,7 @@ public class Topic_16_Shadow_DOM {
     }
 
     @Test
-    public void TC_01_() {
+    public void TC_01_shadow_DOM() {
         driver.get("https://automationfc.github.io/shadow-dom/");
 
         //driver =  Dai dien cho cai shadow DOM ben ngoai
@@ -34,7 +34,7 @@ public class Topic_16_Shadow_DOM {
         SearchContext shadowRootContext = shadowHostElement.getShadowRoot();
 
         String somtext = shadowRootContext.findElement(By.cssSelector("span#shadow_content>span")).getText();
-        Assert.assertEquals(shadowRootContext.findElement(By.cssSelector("span#shadow_content>span")).getText(),"some text");
+        Assert.assertEquals(shadowRootContext.findElement(By.cssSelector("span#shadow_content>span")).getText(), "some text");
         System.out.println(somtext);
 
         List<WebElement> allInput = shadowRootContext.findElements(By.cssSelector("input"));
@@ -50,7 +50,45 @@ public class Topic_16_Shadow_DOM {
     }
 
     @Test
-    public void TC_02_() {
+    public void TC_02_shadow_DOM_shoppe() {
+        driver.get("https://shopee.vn/");
+        driver.manage().window().maximize();
+        WebElement shawdowHostElement = driver.findElement(By.cssSelector("shopee-banner-popup-stateful"));
+        SearchContext shadowRootContext = shawdowHostElement.getShadowRoot();
+
+        if (shadowRootContext.findElements(By.cssSelector("home-popup__content")).size() > 0 && shadowRootContext.findElements(By.cssSelector("home-popup__content")).get(0).isDisplayed()) {
+            shadowRootContext.findElement(By.cssSelector("div.home-popup__close-area")).click();
+            SleepInSeconds(3);
+        }
+        //Ko hien thi/da closed thi qua step search du lieu
+        driver.findElement(By.cssSelector("div.shopee-searchbar-input>input")).sendKeys("IP 15 Promax");
+        driver.findElement(By.cssSelector("button.shopee-searchbar__search-button")).click();
+        SleepInSeconds(3);
+
+    }
+
+    @Test
+    public void TC_03_shadow_DOM_Book() {
+        driver.get("https://books-pwakit.appspot.com/");
+
+        driver.manage().window().maximize();
+        WebElement shawdowHostElement = driver.findElement(By.cssSelector("book-app[apptitle='BOOKS']"));
+        SearchContext shadowRootContext = shawdowHostElement.getShadowRoot();
+
+        //nested level 1 shadowRoot
+        WebElement nestedShadowRoot = shadowRootContext.findElement(By.cssSelector("app-toolbar.toolbar-bottom"));
+        SearchContext nestedLv1ShadowContext = nestedShadowRoot.getShadowRoot();
+
+
+        //nested level 2 shadow
+        WebElement nestedLv2ShadowElement = shadowRootContext.findElement(By.cssSelector("book-input-decorator"));
+        SearchContext nestedLv2ShadowContext = nestedLv2ShadowElement.getShadowRoot();
+
+        //enter "Harry Poster" to search texbox
+        nestedLv1ShadowContext.findElement(By.cssSelector("input#input")).sendKeys("Harry Poster");
+        //CLick search icon
+        nestedLv2ShadowContext.findElement(By.cssSelector("div.icon")).click();
+
 
     }
 
