@@ -82,9 +82,21 @@ public class Topic_16_Shadow_DOM {
 
         //enter "Harry Poster" to search texbox
         shadowRootContext.findElement(By.cssSelector("input#input")).sendKeys("Harry Poster");
+        SleepInSeconds(3);
         //CLick search icon
         nestedLv1ShadowContext.findElement(By.cssSelector("div.icon")).click();
+        SleepInSeconds(2);
 
+        //Verify san pham dau tien duoc hien thi
+        WebElement nestedShadowElementlv1 = shadowRootContext.findElement(By.cssSelector("book-explore._page"));
+        SearchContext nestedShadowContentlv1 = nestedShadowElementlv1.getShadowRoot();
+
+
+        WebElement nestedShadowElementlv2 = nestedShadowContentlv1.findElement(By.cssSelector("ul.books>li:first-child>book-item"));
+        SearchContext nestedShadowContentlv2 = nestedShadowElementlv2.getShadowRoot();
+
+        Assert.assertEquals(nestedShadowContentlv2.findElement(By.cssSelector("h2.title")).getText(),"The Psychology of Harry Potter");
+        System.out.println(nestedShadowContentlv2.findElement(By.cssSelector("h2.title")).getText());
 
     }
 
