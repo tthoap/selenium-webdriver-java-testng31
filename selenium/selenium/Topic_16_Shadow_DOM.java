@@ -76,18 +76,14 @@ public class Topic_16_Shadow_DOM {
         SearchContext shadowRootContext = shawdowHostElement.getShadowRoot();
 
         //nested level 1 shadowRoot
-        WebElement nestedShadowRoot = shadowRootContext.findElement(By.cssSelector("app-toolbar.toolbar-bottom"));
+        WebElement nestedShadowRoot = shadowRootContext.findElement(By.cssSelector("book-input-decorator"));
         SearchContext nestedLv1ShadowContext = nestedShadowRoot.getShadowRoot();
 
 
-        //nested level 2 shadow
-        WebElement nestedLv2ShadowElement = shadowRootContext.findElement(By.cssSelector("book-input-decorator"));
-        SearchContext nestedLv2ShadowContext = nestedLv2ShadowElement.getShadowRoot();
-
         //enter "Harry Poster" to search texbox
-        nestedLv1ShadowContext.findElement(By.cssSelector("input#input")).sendKeys("Harry Poster");
+        shadowRootContext.findElement(By.cssSelector("input#input")).sendKeys("Harry Poster");
         //CLick search icon
-        nestedLv2ShadowContext.findElement(By.cssSelector("div.icon")).click();
+        nestedLv1ShadowContext.findElement(By.cssSelector("div.icon")).click();
 
 
     }
