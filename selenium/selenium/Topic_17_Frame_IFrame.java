@@ -3,6 +3,7 @@ package selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -17,7 +18,7 @@ public class Topic_17_Frame_IFrame {
 
     @BeforeClass
     public void beforeClass() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
@@ -74,8 +75,10 @@ public class Topic_17_Frame_IFrame {
         //INput Customer ID va click Login
         driver.findElement(By.cssSelector("input[name='fldLoginUserId']")).sendKeys("Johnwick");
         driver.findElement(By.cssSelector("a.login-btn")).click();
+       // driver.switchTo().defaultContent();
+       // SleepInSeconds(3);
 
-        driver.switchTo().defaultContent();
+        Assert.assertTrue(driver.findElement(By.cssSelector("input#keyboard")).isDisplayed());
 
 
 
