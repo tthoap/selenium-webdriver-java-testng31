@@ -2,6 +2,7 @@ package selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -144,7 +145,7 @@ public class Topic_18_Window_Tab {
     public void TC_04_DCE_Course_Search(){
         driver.get("https://courses.dce.harvard.edu/");
         driver.findElement(By.cssSelector("a[data-action='login']")).click();
-        SleepInSeconds(3);
+        SleepInSeconds(5);
 
         switchToWindowByTitle("Harvard Division of Continuing Education Login Portal");
         Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='DCE Login Portal']")).isDisplayed());
@@ -154,6 +155,31 @@ public class Topic_18_Window_Tab {
         switchToWindowByTitle("DCE Course Search");
         Assert.assertEquals(driver.findElement(By.cssSelector("p.sam-wait__message")).getText(),"Authentication was not successful. Please try again.");
         driver.switchTo().alert().dismiss();
+
+
+    }
+
+    @Test
+    public void TC_05_Selenium_4x(){
+        driver.get("https://live.techpanda.org/");
+        driver.findElement(By.xpath("//a[text()='Mobile']")).click();
+        SleepInSeconds(2);
+        System.out.println("Driver: " + driver.toString());
+        System.out.println("Window ID" + driver.getWindowHandle());
+
+        driver.switchTo().newWindow(WindowType.TAB).get("https://live.techpanda.org/index.php/customer/account/login/");
+        driver.findElement(By.cssSelector("button#send2")).click();
+        Assert.assertEquals(driver.findElement(By.cssSelector("div#advice-required-entry-email")).getText(),"This is a required field.");
+        System.out.println("Driver: " + driver.toString());
+        System.out.println("Window ID" + driver.getWindowHandle());
+        driver.close();
+
+
+        switchToWindowByTitle("Mobile");
+        driver.findElement(By.xpath("//a[@title='Sony Xperia']/parent::h2/following-sibling::div[@class='actions']//a[@class='link-compare']")).click();
+        SleepInSeconds(2);
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.success-msg span")).getText(),"The product Sony Xperia has been added to comparison list.");
+        SleepInSeconds(3);
 
 
     }
