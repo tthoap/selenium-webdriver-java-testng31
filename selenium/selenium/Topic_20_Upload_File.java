@@ -92,12 +92,6 @@ public class Topic_20_Upload_File {
         Assert.assertTrue(driver.findElement(By.xpath("//a[text()='"+HoiAn+"']")).isDisplayed());
     }
 
-    @Test
-    public void TC_02_() {
-
-    }
-
-
     @AfterClass
     public void afterClass() {
         driver.quit();
