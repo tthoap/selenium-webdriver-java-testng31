@@ -43,7 +43,13 @@ public class Topic_27_Mix_wait {
         driver.get("https://live.techpanda.org/index.php/customer/account/login/");
 
         //Wait với implicit
-        driver.findElement(By.cssSelector("input#email124"));
+        System.out.println("Start = " + getDateTimeNow());
+        try {
+            driver.findElement(By.cssSelector("input#email124"));
+        } catch (Exception e) {
+            System.out.println("End = " + getDateTimeNow());
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -65,12 +71,23 @@ public class Topic_27_Mix_wait {
     @Test
     public void TC_03_Element_Not_Found_Only_Explicit_Element() {
         explicitWait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
         driver.get("https://live.techpanda.org/index.php/customer/account/login/");
 
         //Wait với explicit =3, implicit = 0
+        WebElement emailTextbox = null;
+
         System.out.println("Start = " + getDateTimeNow());
-        WebElement emailTextbox = driver.findElement(By.cssSelector("input#email6565"));
+        try {
+            emailTextbox = driver.findElement(By.cssSelector("input#email6565"));
+        } catch (Exception e) {
+            System.out.println("End = " + getDateTimeNow());
+            throw new RuntimeException(e);
+        }
+
+
+        System.out.println("Start = " + getDateTimeNow());
         try {
             explicitWait.until(ExpectedConditions.visibilityOf(emailTextbox));
         } catch (Exception e) {
@@ -80,7 +97,41 @@ public class Topic_27_Mix_wait {
     }
 
     @Test
-    public void TC_04_Element_Not_Found_Mix() {
+    public void TC_04_Element_Not_Found_Mix_Equal() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        explicitWait = new WebDriverWait(driver,Duration.ofSeconds(5));
+
+        driver.get("https://live.techpanda.org/index.php/customer/account/login/");
+
+        //Wait với explicit
+        System.out.println("Start = " + getDateTimeNow());
+        try {
+            explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#email6565")));
+        } catch (Exception e) {
+            System.out.println("End = " + getDateTimeNow());
+            throw new RuntimeException(e);
+        }
+
+    }
+    @Test
+    public void TC_04_Element_Not_Found_Mix_Explixit_Longer() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        explicitWait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+        driver.get("https://live.techpanda.org/index.php/customer/account/login/");
+
+        //Wait với explicit
+        System.out.println("Start = " + getDateTimeNow());
+        try {
+            explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#email6565")));
+        } catch (Exception e) {
+            System.out.println("End = " + getDateTimeNow());
+            throw new RuntimeException(e);
+        }
+
+    }
+    @Test
+    public void TC_04_Element_Not_Found_Mix_Implixit_Longer() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver,Duration.ofSeconds(1));
 
