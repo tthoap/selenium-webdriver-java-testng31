@@ -28,11 +28,13 @@ public class Topic_01_CloudFlare {
         driver = new EdgeDriver(edgeOptions);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
     }
 
     @Test
     public void TC_01_() {
         driver.get("https://admin-demo.nopcommerce.com");
+        driver.manage().window().maximize();
     }
 
 
