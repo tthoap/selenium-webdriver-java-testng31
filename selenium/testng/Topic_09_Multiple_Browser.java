@@ -1,11 +1,15 @@
 package testng;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.time.Duration;
 
 public class Topic_09_Multiple_Browser {
     WebDriver driver;
@@ -17,18 +21,20 @@ public class Topic_09_Multiple_Browser {
 	String username = "selenium_11_01@gmail.com" ;
 	String password = "111111";
 
+	String domainURL = null;
+
 	@BeforeClass
-	@Parameters({"server", "browser"})
-	public void beforeClass(String serverName, String browserName) {
+	@Parameters( {"server","browser"})
+	public void beforeClass( String serverName,@Optional("Firefox") String browserName) {
 		//If-Else
-		if(browserName.equalsIgnoreCase("Chrome")){
-			driver = new ChromeDriver();
-		} else if(browserName.equalsIgnoreCase("Firefox")){
-			driver = new FirefoxDriver();
-		} else if(browserName.equalsIgnoreCase("Edge")){
-			driver = new EdgeDriver();
-		} else if(browserName.equalsIgnoreCase("Safari")){
-			driver = new SafariDriver();
+		if(serverName.equalsIgnoreCase("Dev")){
+			domainURL = "http://dev.techpanda.org";
+		} else if(serverName.equalsIgnoreCase("Testing")){
+			domainURL = "http://testing.techpanda.org";
+		} else if(serverName.equalsIgnoreCase("Staging")){
+			domainURL = "http://staging.techpanda.org";
+		} else if(serverName.equalsIgnoreCase("Production")){
+			domainURL = "http://live.techpanda.org";
 		} else {
 			throw new RuntimeException("Brower is not valid!!");
 		}
@@ -37,21 +43,26 @@ public class Topic_09_Multiple_Browser {
 		switch (browserName){
 			case "Chrome":
 				driver = new ChromeDriver();
+				break;
 			case "Edge":
 				driver = new EdgeDriver();
-			case "Chrome":
+				break;
+			case "Firefox":
 				driver = new FirefoxDriver();
-			case "Chrome":
-				driver = new ChromeDriver();
+				break;
+//			case "Safari":
+//				driver = new SafariDriver();
+			default:
+				new RuntimeException("Browser is not valid!!");
 		}
 		
 		//Khởi tạo browser
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 	}
 
 	@Test
 	public void loginOnMultitpleBrowser()  {
-		driver.get("http://live.techpanda.org/index.php/customer/account/login/");
+		driver.get(domainURL + "/index.php/customer/account/login/");
 
 		driver.findElement(emailTextbox).sendKeys(username);
 		driver.findElement(passwordTextbox).sendKeys(password);

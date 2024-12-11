@@ -21,7 +21,7 @@ public class Topic_07_Description {
 
    // @Test(priority = 2) or
 
-   @Test(enable=false)
+   @Test(enabled = false)
     public void shouldBeLoginPass() {
         System.out.println("Run TC_02");
     }
