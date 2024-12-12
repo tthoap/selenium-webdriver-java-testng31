@@ -7,6 +7,7 @@ public class Topic_01_Annotation {
     @BeforeSuite
     public void beforeSuite(){
         System.out.println("Run before suite");
+
     }
     @BeforeClass
     public void beforeClass(){
