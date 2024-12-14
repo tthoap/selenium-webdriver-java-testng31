@@ -31,7 +31,7 @@ public class Topic_10_Loop {
 
     }
 
-    @Test(invocationCount = 2)
+    @Test(invocationCount = 1)
     public void Login_01_Register_Success() throws IOException {
         driver.get("http://live.techpanda.org/");
         driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();

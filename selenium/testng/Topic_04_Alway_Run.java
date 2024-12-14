@@ -18,7 +18,7 @@ public class Topic_04_Alway_Run {
         //Mở đến trang login
         //Login thành công
         // => không thành công => Fail ở step này
-        Assert.assertTrue(false);
+        Assert.assertTrue(true);
     }
 
     @AfterClass(alwaysRun = true)

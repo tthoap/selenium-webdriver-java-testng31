@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Live Guru"  >
+    <parameter name ="server" value="Production"/>
+       <test name="Run on Chrome" preserve-order="false">
+           <parameter name ="browser" value="Chrome"/>
+           <classes>
+               <class name="testng.Topic_11_Timeout"></class>
+               <class name="testng.Topic_07_Description"></class>
+               <class name="testng.Topic_09_Multiple_Browser"></class>
+               <class name="testng.Topic_08_DataProvider"></class>
+               <class name="testng.Topic_02_Assertion"></class>
+               <class name="testng.Topic_04_Alway_Run"></class>
+               <class name="testng.Topic_06_Skip"></class>
+               <class name="testng.Topic_03_Group"></class>
+               <class name="testng.Topic_05_Priority"></class>
+               <class name="testng.Topic_01_Annotation"></class>
+               <class name="testng.Topic_10_Loop"></class>
+           </classes>
+       </test>
+</suite>
+
+
+
+
+
+
+

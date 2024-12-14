@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 public class Topic_02_Assertion {
 
     @Test
-    public void TC_01_Assertion() {
+    public void TC_02_Assertion() {
         System.out.println("Run TC 02 Assertion");
     }
 //    Assert.assertTrue();

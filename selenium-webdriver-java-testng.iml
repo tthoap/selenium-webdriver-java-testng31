@@ -11,5 +11,6 @@
     <orderEntry type="library" name="testng-7.8.0" level="project" />
     <orderEntry type="library" name="commons-codec-1.16.0" level="project" />
     <orderEntry type="library" name="selenium-java-4.25.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.18.0" level="project" />
   </component>
 </module>
